@@ -1,4 +1,4 @@
--- EVENTOS ACUMULADOS (BIOMA) COM DATAS SEM EVENTOS
+-- EVENTOS ACUMULADOS AMAZÔNIA LEGAL COM DATAS SEM EVENTOS
  
 -- Criação de uma tabela de datas temporária para o intervalo especificado
 WITH RECURSIVE DateRange AS (
