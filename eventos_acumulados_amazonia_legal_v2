@@ -1,0 +1,20 @@
+--EVENTOS DE FOGO AMAZONIA LEGAL - GEOM COMPLETO COM RECORTE 
+SELECT 
+        ev1.id,
+		    ev1.geom,
+		    st_intersection(ev1.geom, amz_l.geom) as eventos_amz_legal
+    FROM 
+        queimadas.tb_evento AS ev1
+    JOIN 
+        queimadas.tb_escopo_queimadas AS escopo
+        ON st_intersects(ev1.geom, escopo.geom)
+    JOIN 
+        bases_auxiliares.censipam_amazonia_legal_u AS amz_l
+        ON st_intersects(ev1.geom, amz_l.geom)
+    WHERE 
+        ev1.id_status_evento IN (1, 2, 3) -- Condição de eventos ativos, em observação
+        AND ev1.area_km2 > 1 -- Condição de área maior que 1km2
+        AND ev1.dt_minima >= '2024-01-01'
+        AND ev1.dt_minima <= '2025-01-01' -- Define período a ser investigado
+  
+	 
