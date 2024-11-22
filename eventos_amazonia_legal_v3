@@ -1,6 +1,5 @@
 SELECT 
     	ev1.id, 
-	ev1.geom,
 	dt_minima,
     	ST_Centroid(st_intersection(ev1.geom, amz_l.geom)) AS centroide_evento
 FROM 
