@@ -1,4 +1,5 @@
---EVENTOS DE FOGO AMAZONIA LEGAL - GEOM COMPLETO COM RECORTE 
+--CENTROÍDES DE EVENTOS DE FOGO NA AMAZONIA LEGAL 
+--Processar no Banco sig_sipam de homologação
 CREATE TABLE temp_codesus.amz_leg_2022 as (
 SELECT
         ev1.id, 
