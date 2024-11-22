@@ -1,0 +1,20 @@
+--EVENTOS DE FOGO AMAZONIA LEGAL - GEOM COMPLETO COM RECORTE 
+CREATE TABLE temp_codesus.amz_leg_2022 as (
+SELECT
+        ev1.id, 
+		dt_minima,
+    	ST_Centroid(st_intersection(ev1.geom, amz_l.geom)) AS centroide_evento
+FROM 
+    	queimadas.tb_evento AS ev1
+JOIN 
+   		queimadas.tb_escopo_queimadas AS escopo
+    	ON st_intersects(ev1.geom, escopo.geom)
+JOIN 
+	bases_auxiliares.censipam_amazonia_legal_u AS amz_l
+    	ON st_intersects(ev1.geom, amz_l.geom)
+WHERE 
+    	ev1.id_status_evento IN (1, 2, 3)  -- Filtra eventos ativos ou em observação
+    	AND ev1.area_km2 > 1  -- Filtra eventos com área maior que 1 km²
+    	AND ev1.dt_minima >= '2022-01-01'  -- DEFINIR DATA INICIAL
+    	AND ev1.dt_minima <= '2022-12-31'  -- DEFINIR DATA FINAL
+		)
